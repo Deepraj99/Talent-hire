@@ -2,6 +2,8 @@
 
 A new Flutter project.
 
+![WhatsApp-Video-2021-06-22-at-12 18 43-AM](https://user-images.githubusercontent.com/57484386/122813741-ecb1ee80-d2f0-11eb-8a25-b6e17703051f.gif)
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
