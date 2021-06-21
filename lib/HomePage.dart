@@ -8,120 +8,85 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Widget buildButtonLeft() {
-    return Container(
-      height: 30.0,
-      color: Colors.red,
-    );
-  }
-
-  Widget buildCardLeft() {
-    return Container(
-      margin: EdgeInsets.only(left: 8.0),
-      height: 60.0,
-      width: 60.0,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(5.0),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          SizedBox(height: 10.0),
-          Container(
-            height: 60.0,
-            width: 60.0,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30.0),
-              color: Colors.red,
-              image: DecorationImage(
-                image: NetworkImage(
-                    'https://pixel.nymag.com/imgs/daily/vulture/2017/06/14/14-tom-cruise.w700.h700.jpg'),
+  Widget buildCardLeft(String name, String status, int cardIndex) {
+    return Card(
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+        elevation: 7.0,
+        child: Column(
+          children: <Widget>[
+            SizedBox(height: 12.0),
+            Stack(children: <Widget>[
+              Container(
+                height: 60.0,
+                width: 60.0,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30.0),
+                    color: Colors.green,
+                    image: DecorationImage(
+                        image: NetworkImage(
+                            'https://pixel.nymag.com/imgs/daily/vulture/2017/06/14/14-tom-cruise.w700.h700.jpg'))),
               ),
-            ),
-          ),
-          SizedBox(height: 20.0),
-          Text(
-            "Name",
-            style: TextStyle(
-                color: Colors.black,
+              Container(
+                margin: EdgeInsets.only(left: 40.0),
+                height: 20.0,
+                width: 20.0,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30.0),
+                    color: status == 'Away' ? Colors.amber : Colors.green,
+                    border: Border.all(
+                        color: Colors.white,
+                        style: BorderStyle.solid,
+                        width: 2.0)),
+              )
+            ]),
+            SizedBox(height: 8.0),
+            Text(
+              name,
+              style: TextStyle(
                 fontFamily: 'Quicksand',
                 fontWeight: FontWeight.bold,
-                fontSize: 20.0),
-          ),
-          SizedBox(height: 10.0),
-          Text(
-            "Available for",
-            style: TextStyle(
-                color: Colors.grey, fontFamily: 'Quicksand', fontSize: 20.0),
-          ),
-          Text(
-            "the next 2 hours",
-            style: TextStyle(
-                color: Colors.grey, fontFamily: 'Quicksand', fontSize: 20.0),
-          ),
-          SizedBox(height: 5.0),
-        ],
-      ),
-    );
-  }
-
-  Widget buildCardRight() {
-    return Container(
-      margin: EdgeInsets.only(right: 8.0),
-      height: 60.0,
-      width: 60.0,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(5.0),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          SizedBox(height: 10.0),
-          Container(
-            height: 60.0,
-            width: 60.0,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30.0),
-              color: Colors.red,
-              image: DecorationImage(
-                image: NetworkImage(
-                    'https://pixel.nymag.com/imgs/daily/vulture/2017/06/14/14-tom-cruise.w700.h700.jpg'),
+                fontSize: 15.0,
               ),
             ),
-          ),
-          SizedBox(height: 20.0),
-          Text(
-            "Name",
-            style: TextStyle(
-                color: Colors.black,
-                fontFamily: 'Quicksand',
-                fontWeight: FontWeight.bold,
-                fontSize: 20.0),
-          ),
-          SizedBox(height: 10.0),
-          Text(
-            "Available for",
-            style: TextStyle(
-                color: Colors.grey, fontFamily: 'Quicksand', fontSize: 20.0),
-          ),
-          Text(
-            "the next 2 hours",
-            style: TextStyle(
-                color: Colors.grey, fontFamily: 'Quicksand', fontSize: 20.0),
-          ),
-          SizedBox(height: 5.0),
-        ],
-      ),
-    );
+            SizedBox(height: 5.0),
+            Text(
+              status,
+              style: TextStyle(
+                  fontFamily: 'Quicksand',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 12.0,
+                  color: Colors.grey),
+            ),
+            SizedBox(height: 15.0),
+            Expanded(
+                child: Container(
+                    width: 175.0,
+                    decoration: BoxDecoration(
+                      color: status == 'Away' ? Colors.grey : Colors.green,
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(10.0),
+                          bottomRight: Radius.circular(10.0)),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Request',
+                        style: TextStyle(
+                            color: Colors.white, fontFamily: 'Quicksand'),
+                      ),
+                    )))
+          ],
+        ),
+        margin: cardIndex.isEven
+            ? EdgeInsets.fromLTRB(10.0, 0.0, 25.0, 10.0)
+            : EdgeInsets.fromLTRB(25.0, 0.0, 5.0, 10.0));
   }
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.white10,
         title: new FlutterLogo(size: 25.0),
         elevation: 0.0,
         centerTitle: true,
@@ -144,7 +109,7 @@ class _HomePageState extends State<HomePage> {
             children: [
               Container(
                 alignment: Alignment(0.0, -0.40),
-                color: Colors.white,
+                // color: Colors.white,
                 child: Text(
                   "Get coaching",
                   style: TextStyle(
@@ -155,56 +120,59 @@ class _HomePageState extends State<HomePage> {
                 ),
                 height: 50.0,
               ),
-              Container(
+              Card(
+                elevation: 7.0,
                 margin: EdgeInsets.fromLTRB(25.0, 25.0, 25.0, 0.0),
-                padding: EdgeInsets.fromLTRB(30.0, 8.0, 5.0, 5.0),
-                height: 150.0,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20.0),
-                ),
-                child: Row(
-                  children: [
-                    Column(
-                      children: [
-                        SizedBox(height: 36.0),
-                        Text(
-                          'YOU HAVE',
-                          style: TextStyle(
-                              color: Colors.grey,
-                              fontFamily: 'Quicksand',
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14.0),
-                        ),
-                        Text(
-                          '206',
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontFamily: 'Quicksand',
-                              fontWeight: FontWeight.bold,
-                              fontSize: 40.0),
-                        ),
-                      ],
-                    ),
-                    SizedBox(width: 80.0),
-                    Container(
-                      height: 60.0,
-                      width: 125.0,
-                      decoration: BoxDecoration(
-                        color: Colors.greenAccent[100],
-                        borderRadius: BorderRadius.circular(5.0),
+                child: Container(
+                  padding: EdgeInsets.fromLTRB(30.0, 8.0, 5.0, 5.0),
+                  height: 150.0,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  child: Row(
+                    children: [
+                      Column(
+                        children: [
+                          SizedBox(height: 36.0),
+                          Text(
+                            'YOU HAVE',
+                            style: TextStyle(
+                                color: Colors.grey,
+                                fontFamily: 'Quicksand',
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14.0),
+                          ),
+                          Text(
+                            '206',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontFamily: 'Quicksand',
+                                fontWeight: FontWeight.bold,
+                                fontSize: 40.0),
+                          ),
+                        ],
                       ),
-                      child: Center(
-                        child: Text(
-                          'Buy more',
-                          style: TextStyle(
-                              fontFamily: 'Quicksand',
-                              fontWeight: FontWeight.bold,
-                              color: Colors.green),
+                      SizedBox(width: 80.0),
+                      Container(
+                        height: 60.0,
+                        width: 125.0,
+                        decoration: BoxDecoration(
+                          color: Colors.greenAccent[100],
+                          borderRadius: BorderRadius.circular(5.0),
+                        ),
+                        child: Center(
+                          child: Text(
+                            'Buy more',
+                            style: TextStyle(
+                                fontFamily: 'Quicksand',
+                                fontWeight: FontWeight.bold,
+                                color: Colors.green),
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
               Container(
@@ -240,14 +208,22 @@ class _HomePageState extends State<HomePage> {
                 mainAxisSpacing: 16.0,
                 shrinkWrap: true,
                 children: [
-                  buildCardLeft(),
-                  buildCardRight(),
-                  buildCardLeft(),
-                  buildCardRight(),
-                  buildCardLeft(),
-                  buildCardRight(),
-                  buildCardLeft(),
-                  buildCardRight(),
+                  buildCardLeft('Tom', 'Available', 1),
+                  buildCardLeft('Tom', 'Away', 2),
+                  buildCardLeft('Tom', 'Away', 3),
+                  buildCardLeft('Tom', 'Available', 4),
+                  buildCardLeft('Tom', 'Available', 5),
+                  buildCardLeft('Tom', 'Away', 6),
+                  buildCardLeft('Tom', 'Away', 7),
+                  buildCardLeft('Tom', 'Available', 8),
+                  buildCardLeft('Tom', 'Available', 9),
+                  buildCardLeft('Tom', 'Away', 10),
+                  buildCardLeft('Tom', 'Away', 11),
+                  buildCardLeft('Tom', 'Available', 12),
+                  buildCardLeft('Tom', 'Available', 13),
+                  buildCardLeft('Tom', 'Away', 14),
+                  buildCardLeft('Tom', 'Away', 15),
+                  buildCardLeft('Tom', 'Available', 16),
                 ],
               ),
             ],
